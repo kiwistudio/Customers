@@ -167,11 +167,11 @@ class EditOrderView(UpdateView):
 	model = Customer
 	template_name = 'edit_order.html'
 	form_class = EditOrderForm
-	def get_success_url(self):
-		return u'%s?status_message=Заказ сохранен!' % reverse('edit_order')
+	def get_success_url(self, **kwargs):
+		return HttpResponseRedirect(u'orderlist/%s/?status_message=Заказ сохранен!' % str(kwargs={'pk': kwargs['instance'].id}))
 	def post(self, request, *args, **kwargs):
 		if request.POST.get('cancel_button'):
-			return HttpResponseRedirect(u'%s?status_message=редактирование отменено!' % reverse('edit_order'))
+			return HttpResponseRedirect(u'%s?status_message=редактирование отменено!' % reverse('orderlist'))
 		else:
 			return super(EditOrderView, self).post(request, *args, **kwargs)
 
