@@ -175,7 +175,7 @@ class EditOrderView(UpdateView):
 
 def orderlist(request, pk):
 	customer = Customer.objects.get(pk=pk)
-	product = Product.objects.filter(customer_foreign=pk)
+	product = Product.objects.filter(pk=pk)
 
 	# paginate operations
 	paginator = Paginator(customer, 20)
@@ -188,7 +188,7 @@ def orderlist(request, pk):
 		customer = paginator.page(1)
 	except EmptyPage:
 	# last page of results.
-		customer = customer.objects.get(pk=pk)
+		customer = Customer.objects.get(pk=pk)
 		customer = paginator.page(paginator.num_pages)
 
 	context = {'customer':customer,
