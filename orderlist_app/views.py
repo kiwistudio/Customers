@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
+
 from django.forms import ModelForm
 from django.views.generic import UpdateView
 
@@ -16,6 +17,7 @@ from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import FormActions
 
 from .models import Customer, Product
+
 
 # Create your views here.
 def home(request):
@@ -162,7 +164,7 @@ class EditOrderForm2(ModelForm):
 
 
 class EditOrderView(UpdateView):
-	model = Customer, Product
+	model = Customer
 	template_name = 'edit_order.html'
 	form_class = EditOrderForm
 	def get_success_url(self):

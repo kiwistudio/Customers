@@ -38,7 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'orderlist_app',
+    'crispy_forms',
 )
+
+# CRISPY_TEMPLATE_PACK = 'uni_form'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -63,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                "orderlist.context_processors.orderlist_proc",
                 'django.contrib.messages.context_processors.messages',
             ],
         },
