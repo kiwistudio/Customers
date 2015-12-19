@@ -1,0 +1,89 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf8"/>
+  <title>orderlist</title>
+  <meta name="description" value="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <!--Include Style-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ PORTAL_URL }}{% static "css/main.css" %}">
+  {% block extra_css %}{% endblock extra_css %}  
+  
+
+</head>
+
+<body>
+
+  <!--Start Container-->
+  <div class="container">
+
+	<!--start Header-->
+	<div class="row" id="header">
+	  <!--Logo-->
+	  <div class="col-xs-8" style="margin-top:70px">
+		<nav class="navbar navbar-default navbar-fixed-top">
+  		  <div class="container">
+    		<h1 align="center">{% block logo %}{% endblock logo %}</h1>
+  		  </div>
+		</nav>
+	  </div>
+	</div>
+	<!-- End Header-->
+
+	<!--Start mainpage content-->
+	<div class="row" id="content-columns">
+	  <div class="col-xs-12" id="content-column">
+
+	  <!--Status Massage-->
+	  
+	  {% block status_message %}
+          {% if messages %}
+           {% for message in messages %}
+           <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+         
+           {% endfor %}
+	  {% elif request.GET.status_message %}
+	  	<div class="alert alert-success" role="alert">
+	  	  {{ request.GET.status_message }}
+	  	</div>
+          {% endif %}
+      {% endblock %}
+
+
+	  {% block content %}
+	  	<!--Status Massage-->	  
+	    
+	  	{% endblock content %}
+				
+	  </div>
+	</div>
+	<!--End mainpage-->
+
+	<!--Start footer-->
+	{% block footer %}
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+  	  <div class="container" align="center" style="margin-top:15px">
+ 		&copy; 2015 Тестовое задание Евгения Терехова
+  	  </div>
+	</nav>
+	{% endblock footer %}
+	<!--End footer-->
+
+  </div>
+  <!--End container-->
+
+  <!--java script section-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{{ PORTAL_URL }}{% static "js/jquery.js"%}" ></script>
+  <script type="text/javascript" src="{{ PORTAL_URL }}{% static "js/jquery.maskedinput-1.3.min.js"%}"></script>
+  </script>
+  {% block extra_js %}{% endblock extra_js %} 
+ 
+  
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block logo %}Orderlist{% endblock logo %}
+
+
+
+{% block content %}
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ФИО</th>
+        <th>Номер телефона</th>
+        <th>Адрес</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr>
+        {% for c in customer %}
+            <td>{{ c.first_name }}{{ c.last_name }}</td>
+            <td>{{ c.phone }}</td>
+            <td>{{ c.adress }} грн</td>
+            {% endif %}
+      </tr>
+    </tbody>
+  </table>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Дата создания заказа</th>
+        <th>Дата последнего изменения заказа<th>
+        <th>Общая стоимость заказа<th>
+      </tr>
+    </thead>
+    {% for p in product %}
+      <tbody>
+        <tr>
+            <td>{{ p.data_create }}</td>
+            <td>{{ p.data_change }}</td>
+            <td><p>{{ p.price }}</p></td>
+      </tr>
+    </tbody>
+   {% endfor %} 
+  </table>
+
+    
+   <form method="post" enctype="multipart/form-data" role="form">
+      {% csrf_token %}
+
+	<div class="row" id="content-columns">
+	  <div class="col-xs-8" id="content-column">
+          <input class="btn btn-success" onclick="window.history.back();" type="button" value="Назад"/>
+	  </div>
+	  <div class="col-xs-1" id="content-column">
+          <button type="submit" name="exit" class="btn btn-success">Выход</button>
+	  </div>
+	</div>
+
+  </form>
+
+
+
+{% if oper.has_other_pages %}
+{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+<nav class='col-xs-12'>
+  <ul class="pagination">
+      <li>
+        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page=1&amp;">&laquo;</a>
+      </li>
+      {% for p in oper.paginator.page_range %}
+      <li {% if oper.number == p %}class="active"{% endif %}>
+        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page={{ p }}&amp;">{{ p }}</a>
+      </li>
+      {% endfor %}
+      <li>
+        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page={{ oper.paginator.num_pages}}&amp;">&raquo;</a>
+      </li>
+  </ul>
+</nav>
+{% endwith %}
+{% endif %}
+
+{% endblock content %}
+

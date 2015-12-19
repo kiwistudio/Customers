@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block logo %}Orderlist{% endblock logo %}
+
+{% block status_message %}
+  {% if errors %}
+  <div class="alert alert-warning" role="alert">
+    Пожалуйста, исправьте следующие ошибки
+  </div>
+  {% endif %}
+{% endblock status_message %}
+
+{% block content %}
+    <form action="." method="post" enctype="multipart/form-data"
+      role="form" class="form-horizontal">
+  {% csrf_token %}
+
+  <div class="form-group {% if errors.first_name %}has-error{% endif %}">
+    <label for="first_name" class="col-sm-2 control-label">Имя*</label>
+    <div class="col-sm-10">
+      <input type="text" value="{{ request.POST.first_name }}"
+             name="first_name" id="first_name"
+             placeholder="Введите имя"
+             class="form-control" />
+      <span class="help-block">{{ errors.first_name }}</span>
+    </div>
+  </div>
+
+  <div class="form-group {% if errors.last_name %}has-error{% endif %}">
+    <label for="last_name" class="col-sm-2 control-label">Фамилия*</label>
+    <div class="col-sm-10">
+      <input type="text" value="{{ request.POST.last_name }}"
+             name="last_name" id="last_name"
+             placeholder="введите Фамилию"
+             class="form-control" />
+      <span class="help-block">{{ errors.last_name }}</span>
+    </div>
+  </div>
+
+  <div class="form-group {% if errors.adress %}has-error{% endif %}">
+    <label for="adress"class="col-sm-2 control-label">Адрес</label>
+    <div class="col-sm-10">
+      <input type="text" value="{{ request.POST.adress }}"
+             name="adress" id="adress"
+             placeholder="Введите адрес"
+             class="form-control" />
+      <span class="help-block">{{ errors.adress }}</span>
+    </div>
+  </div>
+
+  <div class="form-group {% if errors.phone %}has-error{% endif %}">
+    <label for="phone"class="col-sm-2 control-label">Номер телефона</label>
+    <div class="col-sm-10">
+      <input type="text" value="{{ request.POST.phone }}"
+             name="phone" id="phone"
+             placeholder="Введите номер телефона"
+             class="form-control" />
+      <span class="help-block">{{ errors.phone }}</span>
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+      <button class="btn btn-success" name="ok" type="submit">OK</button>
+		<button type="submit" name="exit" class="btn btn-success">Выход</button>
+    </div>
+  </div>
+
+  </form>
+
+{% endblock content %}
+
+{% block extra_js %}
+  <script src="{{ PORTAL_URL }}{% static 'js/key.js' %}"></script>
+{% endblock extra_js %}

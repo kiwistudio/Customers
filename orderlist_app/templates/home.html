@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block logo %}Orderlist{% endblock logo %}
+
+{% block content %}
+<div class="delay"></div>
+  <div class="row" id="content-columns" style="margin-top: 250px">
+	  <div class="col-xs-7" id="content-column" style="padding-left: 300px !important"> 
+	    <a href="{% url "add_order" %}">
+		<button class="btn btn-info" type="submit">Сделать заказ</button>
+		</a>
+	  </div>
+	  <div class="col-xs-3" id="content-column" style="padding-left: 120px !important">
+		<button class="btn btn-info" type="submit">Корзина</button>
+	  </div>
+  </div>
+
+{% endblock content %}
+
