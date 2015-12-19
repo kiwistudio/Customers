@@ -28,13 +28,12 @@
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія<span class="caret"</span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url "edit_order" c.id %}" class="customer-edit-form-link">Редактирование заказа</a></li>
+                <li><a href="{% url "edit_order" customer.id %}" class="customer-edit-form-link">Редактирование заказа</a></li>
                 <li><a href="#">
                 Отправить заказ в архив</a></li>
               </ul>
               </div>
             </td>
-        {% endfor %}
       </tr>
     </tbody>
   </table>
