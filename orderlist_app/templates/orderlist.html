@@ -16,15 +16,13 @@
     </thead>
       <tbody>
         <tr>
-        {% for c in customer %}
-            <td>{{ c.first_name }}{{ c.last_name }}</td>
-            <td>{{ c.phone }}</td>
-            <td>{{ c.adress }} грн</td>
-            {% endif %}
-        {% for p in product %}
-            <td>{{ p.data_create }}</td>
-            <td>{{ p.data_change }}</td>
-            <td><p>{{ p.price }}</p></td>
+            <td>{{ customer.first_name }}{{ customer.last_name }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.adress }} грн</td>
+
+            <td>{{ product.data_create }}</td>
+            <td>{{ product.data_change }}</td>
+            <td><p>{{ product.price }}</p></td>
             <td>        
               <div class="btn-group">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія<span class="caret"</span>
@@ -36,7 +34,7 @@
               </ul>
               </div>
             </td>
-        {% endif %}
+        {% endfor %}
       </tr>
     </tbody>
   </table>
