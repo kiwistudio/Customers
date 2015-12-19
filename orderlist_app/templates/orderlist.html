@@ -21,27 +21,24 @@
             <td>{{ c.phone }}</td>
             <td>{{ c.adress }} грн</td>
             {% endif %}
-      </tr>
-    </tbody>
-  </table>
-
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Дата создания заказа</th>
-        <th>Дата последнего изменения заказа<th>
-        <th>Общая стоимость заказа<th>
-      </tr>
-    </thead>
-    {% for p in product %}
-      <tbody>
-        <tr>
+        {% for p in product %}
             <td>{{ p.data_create }}</td>
             <td>{{ p.data_change }}</td>
             <td><p>{{ p.price }}</p></td>
+            <td>        
+              <div class="btn-group">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Дія<span class="caret"</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url "edit_order" c.id %}" class="customer-edit-form-link">Редактирование заказа</a></li>
+                <li><a href="#">
+                Отправить заказ в архив</a></li>
+              </ul>
+              </div>
+            </td>
+        {% endif %}
       </tr>
     </tbody>
-   {% endfor %} 
   </table>
 
     

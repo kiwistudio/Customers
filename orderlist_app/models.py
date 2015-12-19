@@ -75,9 +75,4 @@ class Product(models.Model):
         max_length=256,
         blank=False,
         null=True,
-        verbose_name=u"Дата и время операции")
-
-    # customer_foreign = models.ForeignKey('Customer',
-    # 	blank=False,
-    #     null=True,
-    #     verbose_name=u"Заказчик")
+        verbose_name=u"Дата и время последнего изменения")

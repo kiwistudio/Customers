@@ -59,7 +59,42 @@
     </div>
   </div>
 
-    <div class="form-group">
+  <p>Заказ товара</p>
+
+  <div class="form-group {% if errors.product_name %}has-error{% endif %}">
+    <label for="product_name" class="col-sm-2 control-label">Наименование*</label>
+    <div class="col-sm-10">
+      <input type="text" value="{{ request.POST.product_name }}"
+             name="product_name" id="product_name"
+             placeholder="Введите Наименование"
+             class="form-control" />
+      <span class="help-block">{{ errors.product_name }}</span>
+    </div>
+  </div>
+
+  <div class="form-group {% if errors.price %}has-error{% endif %}">
+    <label for="price" class="col-sm-2 control-label">цена*</label>
+    <div class="col-sm-10">
+      <input type="text" value="{{ request.POST.price }}"
+             name="price" id="price"
+             placeholder="введите цену"
+             class="form-control" />
+      <span class="help-block">{{ errors.price }}</span>
+    </div>
+  </div>
+
+  <div class="form-group {% if errors.quantity %}has-error{% endif %}">
+    <label for="quantity"class="col-sm-2 control-label">Колличество</label>
+    <div class="col-sm-10">
+      <input type="text" value="{{ request.POST.quantity }}"
+             name="quantity" id="quantity"
+             placeholder="Введите кол-во товара"
+             class="form-control" />
+      <span class="help-block">{{ errors.quantity }}</span>
+    </div>
+  </div>
+
+    <div class="form-group" style="margin-bottom:150px !important">
     <label class="col-sm-2 control-label"></label>
     <div class="col-sm-10">
       <button class="btn btn-success" name="ok" type="submit">OK</button>

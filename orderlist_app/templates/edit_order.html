@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block status_message %}
+{% if form.errors %}
+<div class="alert alert-warning" role="alert">Пожалуйста, исправьте следующие ошибки</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% crispy form %}
+
+
+
+{% endblock content %}
+
+
