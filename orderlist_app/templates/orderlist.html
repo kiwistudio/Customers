@@ -6,6 +6,17 @@
 
 {% block content %}
 
+{% block menu_groups %}
+    <div class="col-xs-4" id="group-selector">
+    <strong>Фильтры: </strong>
+    <select>
+      <option value="">Дата заказа</option>
+      <option value="">Номер телефона</option>
+      <option value="">архивные заказы</option>
+    </select>
+    </div>
+    {% endblock menu_groups %}
+
   <table class="table table-hover">
   {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
     <thead>
@@ -59,27 +70,7 @@
     </tbody>
   </table>
 
-    
-   <form method="post" enctype="multipart/form-data" role="form">
-      {% csrf_token %}
-
-	<div class="row" id="content-columns">
-    <div class="col-xs-7" id="content-column" style="padding-left: 300px !important;
-                                                    margin-bottom:150px !important"> 
-	  <div class="col-xs-8" id="content-column">
-          <input class="btn btn-success" onclick="window.history.back();" type="button" value="Назад"/>
-	  </div>
-	  <div class="col-xs-1" id="content-column">
-          <button type="submit" name="exit" class="btn btn-success">Выход</button>
-	  </div>
-    </div>
-	</div>
-
-  </form>
-
-
-
-{% if customer.has_other_pages %}
+  {% if customer.has_other_pages %}
 {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
 <nav class='col-xs-12'>
   <ul class="pagination">
@@ -101,6 +92,28 @@
 </nav>
 {% endwith %}
 {% endif %}
+
+    
+   <form method="post" enctype="multipart/form-data" role="form">
+      {% csrf_token %}
+
+	<div class="row" id="content-columns">
+    <div class="col-xs-7" id="content-column" style="padding-left: 300px !important;
+                                                    margin-bottom:150px !important"> 
+	  <div class="col-xs-8" id="content-column">
+          <input class="btn btn-success" onclick="window.history.back();" type="button" value="Назад"/>
+	  </div>
+	  <div class="col-xs-1" id="content-column">
+          <button type="submit" name="exit" class="btn btn-success">Выход</button>
+	  </div>
+    </div>
+	</div>
+
+  </form>
+
+
+
+
 
 {% endblock content %}
 
