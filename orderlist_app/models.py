@@ -36,20 +36,6 @@ class Customer(models.Model):
         blank=False,
         verbose_name=u"телефон")
 
-
-class Product(models.Model):
-    """Product"""
-
-    class Meta(object):
-        verbose_name = u'товар'
-        verbose_name_plural = u"товары"
-        ordering = ('product_name',) # sorted by product_name (default)
-
-	# Добавляем метод для удобного представления в shell и Django админке
-    def __unicode__(self):
-        return u"%s" % (self.product_name)
-			
-
     product_name = models.CharField(
         max_length=256,
         blank=False,
@@ -77,7 +63,6 @@ class Product(models.Model):
         null=True,
         verbose_name=u"Дата и время операции")
 
-    customer_foreign = models.ForeignKey('Customer',
-    	blank=False,
-        null=True,
-        verbose_name=u"Заказчик")
+			
+
+    

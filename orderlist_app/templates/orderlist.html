@@ -7,33 +7,54 @@
 {% block content %}
 
   <table class="table table-hover">
+  {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
     <thead>
       <tr>
+        <th><a href="{% url "orderlist" %}?order_by=data_create{% if order_by == 'data_create' and reverse != '1' %}&amp;reverse=1{% endif %}">
+            Дата создания заказа
+          {% if order_by == 'data_create' and reverse != '1' %}&uarr;
+          {% elif order_by == 'data_create' and reverse == '1' %}&darr;
+          {% endif %}</a>
+        </th>
+        <th><a href="{% url "orderlist" %}?order_by=data_change{% if order_by == 'data_change' and reverse != '1' %}&amp;reverse=1{% endif %}">
+            Дата последнего изменения
+          {% if order_by == 'data_change' and reverse != '1' %}&uarr;
+          {% elif order_by == 'data_change' and reverse == '1' %}&darr;
+          {% endif %}</a>
+        </th>
+        <th><a href="{% url "orderlist" %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+            Дата последнего изменения
+          {% if order_by == 'first_name' and reverse != '1' %}&uarr;
+          {% elif order_by == 'first_name' and reverse == '1' %}&darr;
+          {% endif %}</a>
+        </th>
         <th>ФИО</th>
-        <th>Номер телефона</th>
         <th>Адрес</th>
+        <th>Общая стоимость</th>
+      {% endwith %}
       </tr>
     </thead>
+    {% for c in customer %}
       <tbody>
         <tr>
-            <td>{{ customer.first_name }} {{ customer.last_name }}</td>
-            <td>{{ customer.phone }}</td>
-            <td>{{ customer.adress }}</td>
-
-            <td>{{ product.data_create }}</td>
-            <td>{{ product.data_change }}</td>
-            <td><p>{{ product.price }}</p></td>
+            <td>{{ c.data_create }}</td>
+            <td>{{ c.data_change }}</td>
+            <td>{{ c.phone }}</td>            
+            <td>{{ c.first_name }} {{ c.last_name }}</td>
+            <td>{{ c.adress }}</td> 
+            <td>{{ c.price }}</td> 
             <td>        
               <div class="btn-group">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Действие<span class="caret"</span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url "edit_order" customer.id %}" class="customer-edit-form-link">Редактирование заказа</a></li>
+                <li><a href="{% url "edit_order" c.id %}" class="customer-edit-form-link">Редактирование заказа</a></li>
                 <li><a href="#">
                 Отправить заказ в архив</a></li>
               </ul>
               </div>
-            </td>
+            </td>            
+           {% endfor %}
       </tr>
     </tbody>
   </table>
@@ -43,33 +64,38 @@
       {% csrf_token %}
 
 	<div class="row" id="content-columns">
+    <div class="col-xs-7" id="content-column" style="padding-left: 300px !important"> 
 	  <div class="col-xs-8" id="content-column">
           <input class="btn btn-success" onclick="window.history.back();" type="button" value="Назад"/>
 	  </div>
 	  <div class="col-xs-1" id="content-column">
           <button type="submit" name="exit" class="btn btn-success">Выход</button>
 	  </div>
+    </div>
 	</div>
 
   </form>
 
 
 
-{% if oper.has_other_pages %}
+{% if customer.has_other_pages %}
 {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
 <nav class='col-xs-12'>
   <ul class="pagination">
-      <li>
-        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page=1&amp;">&laquo;</a>
-      </li>
-      {% for p in oper.paginator.page_range %}
-      <li {% if oper.number == p %}class="active"{% endif %}>
-        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page={{ p }}&amp;">{{ p }}</a>
-      </li>
-      {% endfor %}
-      <li>
-        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page={{ oper.paginator.num_pages}}&amp;">&raquo;</a>
-      </li>
+  <li>
+      <a href="{% url "orderlist" %}?page=1&amp;order_by={{ order_by }}&amp;
+      reverse={{ reverse }}">&laquo;</a>
+  </li>
+  {% for p in customer.paginator.page_range %}
+  <li {% if customer.number == p %}class="active"{% endif %}>
+    <a href="{% url "orderlist" %}?page={{ p }}&amp;order_by={{ order_by }}&amp;
+    reverse={{ reverse }}">{{ p }}</a>
+  </li>
+  {% endfor %}
+  <li>
+    <a href="{% url "orderlist" %}?page={{ customer.paginator.num_pages}}&amp;
+    order_by={{ order_by }}&amp;reverse={{ reverse }}">&raquo;</a>
+  </li>
   </ul>
 </nav>
 {% endwith %}
