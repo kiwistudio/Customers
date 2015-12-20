@@ -22,13 +22,13 @@
           {% elif order_by == 'data_change' and reverse == '1' %}&darr;
           {% endif %}</a>
         </th>
+        <th>Номер телефона</th>
         <th><a href="{% url "orderlist" %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
-            Дата последнего изменения
+            ФИО
           {% if order_by == 'first_name' and reverse != '1' %}&uarr;
           {% elif order_by == 'first_name' and reverse == '1' %}&darr;
           {% endif %}</a>
         </th>
-        <th>ФИО</th>
         <th>Адрес</th>
         <th>Общая стоимость</th>
       {% endwith %}
@@ -64,7 +64,8 @@
       {% csrf_token %}
 
 	<div class="row" id="content-columns">
-    <div class="col-xs-7" id="content-column" style="padding-left: 300px !important"> 
+    <div class="col-xs-7" id="content-column" style="padding-left: 300px !important;
+                                                    margin-bottom:150px !important"> 
 	  <div class="col-xs-8" id="content-column">
           <input class="btn btn-success" onclick="window.history.back();" type="button" value="Назад"/>
 	  </div>

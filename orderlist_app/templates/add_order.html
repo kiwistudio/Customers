@@ -108,5 +108,10 @@
 {% endblock content %}
 
 {% block extra_js %}
-  <script src="{{ PORTAL_URL }}{% static 'js/key.js' %}"></script>
+	<script type="text/javascript">  
+	$(document).ready(function() {
+		$("#phone").mask("+7(999) 99-99-999");
+		
+	});
+  </script>
 {% endblock extra_js %}

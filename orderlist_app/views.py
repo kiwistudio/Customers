@@ -154,7 +154,7 @@ def orderlist(request):
 		if request.GET.get('reverse', '') == '1':
 			customer = customer.reverse()
 
-	paginator = Paginator(customer, 2)
+	paginator = Paginator(customer, 15)
 	page = request.GET.get('page')
 	try:
 		customer = paginator.page(page)
